@@ -1,0 +1,1941 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Craftlane — Web Development & Digital Solutions</title>
+
+    <meta name="description"
+          content="Craftlane creates modern, responsive and professional websites for businesses, brands and individuals.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <style>
+
+        /* =========================
+           VARIABLES
+        ========================== */
+
+        :root {
+            --bg: #08070b;
+            --bg-secondary: #0f0d14;
+            --card: rgba(255,255,255,0.035);
+            --card-solid: #111018;
+            --text: #ffffff;
+            --text-secondary: #aaa6b4;
+            --muted: #77727f;
+            --border: #24202b;
+            --accent: #8b5cf6;
+            --accent-light: #b794ff;
+            --accent-soft: rgba(139,92,246,0.12);
+            --nav-bg: rgba(8,7,11,0.78);
+            --shadow: rgba(0,0,0,0.35);
+        }
+
+        /* LIGHT MODE */
+
+        body.light {
+            --bg: #f7f7fa;
+            --bg-secondary: #ffffff;
+            --card: rgba(0,0,0,0.025);
+            --card-solid: #ffffff;
+            --text: #17151c;
+            --text-secondary: #5f5b67;
+            --muted: #77727f;
+            --border: #e5e2eb;
+            --accent: #7040d9;
+            --accent-light: #7040d9;
+            --accent-soft: rgba(112,64,217,0.08);
+            --nav-bg: rgba(247,247,250,0.82);
+            --shadow: rgba(40,30,60,0.08);
+        }
+
+
+        /* =========================
+           RESET
+        ========================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "DM Sans", sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition:
+                background 0.35s ease,
+                color 0.35s ease;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+
+        /* =========================
+           BACKGROUND
+        ========================== */
+
+        body::before {
+            content: "";
+            position: fixed;
+            width: 500px;
+            height: 500px;
+            background: rgba(139,92,246,0.13);
+            filter: blur(120px);
+            border-radius: 50%;
+            top: -180px;
+            left: -150px;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            width: 450px;
+            height: 450px;
+            background: rgba(80,45,150,0.10);
+            filter: blur(120px);
+            border-radius: 50%;
+            bottom: -200px;
+            right: -150px;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+
+        /* =========================
+           NAVBAR
+        ========================== */
+
+        nav {
+            width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            padding: 18px 7%;
+
+            background: var(--nav-bg);
+            backdrop-filter: blur(18px);
+
+            border-bottom: 1px solid var(--border);
+            transition: 0.35s ease;
+        }
+
+        .nav-container {
+            max-width: 1250px;
+            margin: auto;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 1.7rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+
+        .logo span {
+            color: var(--accent-light);
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 22px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            font-size: 0.92rem;
+            transition: 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--text);
+        }
+
+
+        /* =========================
+           THEME TOGGLE
+        ========================== */
+
+        .theme-toggle {
+            width: 46px;
+            height: 46px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border: 1px solid var(--border);
+            border-radius: 50%;
+
+            background: var(--card);
+            color: var(--text);
+
+            cursor: pointer;
+            font-size: 1.05rem;
+
+            transition: 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            border-color: var(--accent);
+            transform: rotate(12deg);
+        }
+
+
+        .nav-btn {
+            padding: 10px 18px;
+            border: 1px solid rgba(139,92,246,0.5);
+            border-radius: 30px;
+            color: var(--text) !important;
+            transition: 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: white !important;
+        }
+
+
+        /* =========================
+           HERO
+        ========================== */
+
+        .hero {
+            min-height: 100vh;
+            padding: 160px 7% 100px;
+
+            display: flex;
+            align-items: center;
+
+            position: relative;
+        }
+
+        .hero-container {
+            max-width: 1250px;
+            width: 100%;
+            margin: auto;
+        }
+
+        .availability {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+
+            padding: 8px 15px;
+
+            border-radius: 30px;
+            border: 1px solid rgba(139,92,246,0.3);
+
+            background: var(--accent-soft);
+
+            color: var(--accent-light);
+
+            font-size: 0.85rem;
+            margin-bottom: 25px;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+
+            background: #65e88a;
+
+            border-radius: 50%;
+
+            box-shadow: 0 0 12px #65e88a;
+        }
+
+        .hero h1 {
+            max-width: 900px;
+
+            font-family: "Space Grotesk", sans-serif;
+
+            font-size: clamp(3rem, 7vw, 6.7rem);
+
+            line-height: 0.98;
+
+            letter-spacing: -5px;
+
+            margin-bottom: 28px;
+        }
+
+        .hero h1 span {
+            color: var(--accent-light);
+        }
+
+        .hero p {
+            max-width: 650px;
+
+            color: var(--text-secondary);
+
+            font-size: 1.15rem;
+
+            margin-bottom: 35px;
+        }
+
+
+        /* =========================
+           BUTTONS
+        ========================== */
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+
+            justify-content: center;
+            align-items: center;
+
+            padding: 14px 24px;
+
+            border-radius: 10px;
+
+            font-weight: 600;
+
+            transition: 0.3s ease;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+
+            box-shadow:
+                0 10px 30px rgba(125,60,255,0.20);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            filter: brightness(1.08);
+        }
+
+        .btn-secondary {
+            border: 1px solid var(--border);
+            color: var(--text);
+            background: var(--card);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+
+        /* =========================
+           STATS
+        ========================== */
+
+        .stats {
+            display: flex;
+
+            gap: 60px;
+
+            margin-top: 75px;
+
+            flex-wrap: wrap;
+        }
+
+        .stat h3 {
+            font-family: "Space Grotesk", sans-serif;
+
+            font-size: 1.5rem;
+
+            margin-bottom: 3px;
+        }
+
+        .stat p {
+            margin: 0;
+
+            font-size: 0.8rem;
+
+            color: var(--muted);
+        }
+
+
+        /* =========================
+           SECTIONS
+        ========================== */
+
+        section {
+            padding: 100px 7%;
+        }
+
+        .section-container {
+            max-width: 1250px;
+            margin: auto;
+        }
+
+        .section-heading {
+            margin-bottom: 50px;
+        }
+
+        .section-label {
+            color: var(--accent-light);
+
+            text-transform: uppercase;
+
+            letter-spacing: 2px;
+
+            font-size: 0.78rem;
+
+            font-weight: 700;
+
+            margin-bottom: 12px;
+        }
+
+        .section-heading h2 {
+            font-family: "Space Grotesk", sans-serif;
+
+            font-size: clamp(2.2rem, 5vw, 4rem);
+
+            letter-spacing: -2px;
+
+            line-height: 1.05;
+        }
+
+        .section-heading p {
+            max-width: 600px;
+
+            color: var(--text-secondary);
+
+            margin-top: 15px;
+        }
+
+
+        /* =========================
+           SERVICES
+        ========================== */
+
+        .services-grid {
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 18px;
+        }
+
+        .service-card {
+            padding: 30px;
+
+            border: 1px solid var(--border);
+
+            border-radius: 18px;
+
+            background: var(--card);
+
+            transition: 0.35s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+
+            border-color: rgba(139,92,246,0.5);
+
+            background: var(--accent-soft);
+        }
+
+        .service-icon {
+            width: 48px;
+            height: 48px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 12px;
+
+            background: var(--accent-soft);
+
+            color: var(--accent-light);
+
+            font-size: 1.4rem;
+
+            margin-bottom: 22px;
+        }
+
+        .service-card h3 {
+            font-family: "Space Grotesk", sans-serif;
+
+            margin-bottom: 10px;
+
+            font-size: 1.25rem;
+        }
+
+        .service-card p {
+            color: var(--text-secondary);
+
+            font-size: 0.92rem;
+        }
+
+
+        /* =========================
+           PRICING
+        ========================== */
+
+        .pricing-grid {
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 20px;
+        }
+
+        .price-card {
+            padding: 35px;
+
+            border-radius: 20px;
+
+            border: 1px solid var(--border);
+
+            background: var(--bg-secondary);
+
+            position: relative;
+
+            transition: 0.35s ease;
+        }
+
+        .price-card:hover {
+            transform: translateY(-8px);
+
+            border-color: rgba(139,92,246,0.5);
+        }
+
+        .price-card.featured {
+            border-color: var(--accent);
+
+            box-shadow:
+                0 20px 60px rgba(125,60,255,0.10);
+        }
+
+        .popular {
+            position: absolute;
+
+            top: 18px;
+            right: 18px;
+
+            padding: 5px 10px;
+
+            background: var(--accent-soft);
+
+            color: var(--accent-light);
+
+            border-radius: 20px;
+
+            font-size: 0.7rem;
+
+            font-weight: 700;
+        }
+
+        .price-card h3 {
+            font-family: "Space Grotesk", sans-serif;
+
+            font-size: 1.35rem;
+        }
+
+        .price {
+            font-family: "Space Grotesk", sans-serif;
+
+            font-size: 2.5rem;
+
+            font-weight: 700;
+
+            margin: 15px 0 5px;
+        }
+
+        .price-note {
+            color: var(--muted);
+
+            font-size: 0.8rem;
+
+            margin-bottom: 25px;
+        }
+
+        .features {
+            list-style: none;
+
+            margin-bottom: 30px;
+        }
+
+        .features li {
+            padding: 8px 0;
+
+            color: var(--text-secondary);
+
+            font-size: 0.9rem;
+        }
+
+        .features li::before {
+            content: "✓";
+
+            color: var(--accent-light);
+
+            margin-right: 10px;
+        }
+
+
+        /* =========================
+           ADDONS
+        ========================== */
+
+        .addons {
+            margin-top: 70px;
+        }
+
+        .addon-grid {
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 14px;
+        }
+
+        .addon {
+            padding: 20px;
+
+            border: 1px solid var(--border);
+
+            border-radius: 14px;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            gap: 15px;
+
+            background: var(--card);
+        }
+
+        .addon span:first-child {
+            color: var(--text-secondary);
+
+            font-size: 0.9rem;
+        }
+
+        .addon span:last-child {
+            color: var(--text);
+
+            font-weight: 600;
+
+            white-space: nowrap;
+
+            font-size: 0.88rem;
+        }
+
+
+        /* =========================
+           PROCESS
+        ========================== */
+
+        .process-grid {
+            display: grid;
+
+            grid-template-columns: repeat(4, 1fr);
+
+            gap: 20px;
+        }
+
+        .process-card {
+            padding: 25px;
+
+            border-left: 1px solid var(--border);
+        }
+
+        .process-number {
+            color: var(--accent-light);
+
+            font-family: "Space Grotesk", sans-serif;
+
+            font-size: 0.85rem;
+
+            margin-bottom: 15px;
+        }
+
+        .process-card h3 {
+            margin-bottom: 8px;
+
+            font-family: "Space Grotesk", sans-serif;
+        }
+
+        .process-card p {
+            color: var(--text-secondary);
+
+            font-size: 0.88rem;
+        }
+
+
+        /* =========================
+           CTA
+        ========================== */
+
+        .cta {
+            padding: 110px 7%;
+        }
+
+        .cta-box {
+            max-width: 1100px;
+
+            margin: auto;
+
+            padding: 70px 50px;
+
+            text-align: center;
+
+            border-radius: 25px;
+
+            border: 1px solid rgba(139,92,246,0.3);
+
+            background:
+                radial-gradient(
+                    circle at center,
+                    rgba(125,60,255,0.12),
+                    transparent 65%
+                ),
+                var(--bg-secondary);
+        }
+
+        .cta-box h2 {
+            font-family: "Space Grotesk", sans-serif;
+
+            font-size: clamp(2.3rem, 5vw, 4rem);
+
+            letter-spacing: -2px;
+
+            margin-bottom: 15px;
+        }
+
+        .cta-box p {
+            max-width: 600px;
+
+            margin: 0 auto 30px;
+
+            color: var(--text-secondary);
+        }
+
+        .contact-buttons {
+            display: flex;
+
+            justify-content: center;
+
+            gap: 12px;
+
+            flex-wrap: wrap;
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================== */
+
+        footer {
+            padding: 45px 7%;
+
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-container {
+            max-width: 1250px;
+
+            margin: auto;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            gap: 30px;
+
+            flex-wrap: wrap;
+
+            align-items: center;
+        }
+
+        .footer-brand p {
+            color: var(--muted);
+
+            font-size: 0.85rem;
+
+            margin-top: 5px;
+        }
+
+        .footer-contact {
+            display: flex;
+
+            gap: 25px;
+
+            flex-wrap: wrap;
+
+            color: var(--text-secondary);
+
+            font-size: 0.85rem;
+        }
+
+        .footer-contact a:hover {
+            color: var(--text);
+        }
+
+
+        /* =========================
+           WHATSAPP
+        ========================== */
+
+        .whatsapp {
+            position: fixed;
+
+            right: 22px;
+
+            bottom: 22px;
+
+            width: 58px;
+
+            height: 58px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background: #25D366;
+
+            color: white;
+
+            font-size: 1.35rem;
+
+            box-shadow: 0 10px 30px var(--shadow);
+
+            z-index: 999;
+
+            transition: 0.3s ease;
+        }
+
+        .whatsapp:hover {
+            transform: scale(1.1);
+        }
+
+
+        /* =========================
+           RESPONSIVE
+        ========================== */
+
+        @media (max-width: 950px) {
+
+            .nav-links {
+                display: none;
+            }
+
+            .services-grid,
+            .pricing-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .addon-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .process-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .hero h1 {
+                letter-spacing: -3px;
+            }
+        }
+
+
+        @media (max-width: 650px) {
+
+            nav {
+                padding: 16px 5%;
+            }
+
+            .nav-right {
+                gap: 10px;
+            }
+
+            .hero {
+                padding: 135px 5% 80px;
+            }
+
+            section {
+                padding: 75px 5%;
+            }
+
+            .hero h1 {
+                font-size: 3.2rem;
+                letter-spacing: -2.5px;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .stats {
+                gap: 30px;
+                margin-top: 55px;
+            }
+
+            .services-grid,
+            .pricing-grid,
+            .addon-grid,
+            .process-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .price-card {
+                padding: 28px;
+            }
+
+            .cta {
+                padding: 75px 5%;
+            }
+
+            .cta-box {
+                padding: 50px 25px;
+            }
+
+            .footer-container {
+                align-items: flex-start;
+
+                flex-direction: column;
+            }
+
+            .footer-contact {
+                flex-direction: column;
+
+                gap: 10px;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+    <!-- =========================
+         NAVBAR
+    ========================== -->
+
+    <nav>
+
+        <div class="nav-container">
+
+            <a href="#home" class="logo">
+                Craft<span>lane</span>
+            </a>
+
+
+            <div class="nav-right">
+
+                <ul class="nav-links">
+
+                    <li>
+                        <a href="#services">
+                            Services
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#pricing">
+                            Pricing
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#process">
+                            Process
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#contact" class="nav-btn">
+                            Let's Talk
+                        </a>
+                    </li>
+
+                </ul>
+
+
+                <!-- LIGHT / DARK MODE -->
+
+                <button
+                    class="theme-toggle"
+                    id="themeToggle"
+                    aria-label="Toggle light and dark mode">
+
+                    ☀
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+
+    <!-- =========================
+         HERO
+    ========================== -->
+
+    <main id="home">
+
+        <section class="hero">
+
+            <div class="hero-container">
+
+                <div class="availability">
+
+                    <span class="dot"></span>
+
+                    Available for freelance projects
+
+                </div>
+
+
+                <h1>
+
+                    Build your
+                    <span>digital presence.</span>
+
+                </h1>
+
+
+                <p>
+
+                    Craftlane creates modern, responsive and professional
+                    websites designed to help businesses, brands and
+                    individuals build a strong online presence.
+
+                </p>
+
+
+                <div class="hero-buttons">
+
+                    <a
+                        href="https://wa.me/919821796908"
+                        class="btn btn-primary"
+                        target="_blank">
+
+                        Start a Project →
+
+                    </a>
+
+
+                    <a
+                        href="#services"
+                        class="btn btn-secondary">
+
+                        Explore Services
+
+                    </a>
+
+                </div>
+
+
+                <div class="stats">
+
+                    <div class="stat">
+
+                        <h3>100%</h3>
+
+                        <p>
+                            Responsive
+                        </p>
+
+                    </div>
+
+
+                    <div class="stat">
+
+                        <h3>SEO</h3>
+
+                        <p>
+                            Ready
+                        </p>
+
+                    </div>
+
+
+                    <div class="stat">
+
+                        <h3>24/7</h3>
+
+                        <p>
+                            Online Presence
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             SERVICES
+        ========================== -->
+
+        <section id="services">
+
+            <div class="section-container">
+
+                <div class="section-heading">
+
+                    <div class="section-label">
+                        What We Do
+                    </div>
+
+                    <h2>
+                        Everything your<br>
+                        website needs.
+                    </h2>
+
+                    <p>
+                        From designing and developing your website to
+                        optimizing and maintaining it, Craftlane provides
+                        complete digital solutions.
+                    </p>
+
+                </div>
+
+
+                <div class="services-grid">
+
+
+                    <div class="service-card">
+
+                        <div class="service-icon">
+                            ⌘
+                        </div>
+
+                        <h3>
+                            Website Development
+                        </h3>
+
+                        <p>
+                            Modern and functional websites built around
+                            your business goals and requirements.
+                        </p>
+
+                    </div>
+
+
+                    <div class="service-card">
+
+                        <div class="service-icon">
+                            ✦
+                        </div>
+
+                        <h3>
+                            UI/UX Design
+                        </h3>
+
+                        <p>
+                            Clean, attractive and user-friendly interfaces
+                            designed to create a better experience.
+                        </p>
+
+                    </div>
+
+
+                    <div class="service-card">
+
+                        <div class="service-icon">
+                            ▣
+                        </div>
+
+                        <h3>
+                            Responsive Design
+                        </h3>
+
+                        <p>
+                            Websites that look and work beautifully on
+                            phones, tablets, laptops and desktops.
+                        </p>
+
+                    </div>
+
+
+                    <div class="service-card">
+
+                        <div class="service-icon">
+                            ⌕
+                        </div>
+
+                        <h3>
+                            SEO
+                        </h3>
+
+                        <p>
+                            Basic search engine optimization to help your
+                            website become more discoverable online.
+                        </p>
+
+                    </div>
+
+
+                    <div class="service-card">
+
+                        <div class="service-icon">
+                            ↗
+                        </div>
+
+                        <h3>
+                            Speed Optimization
+                        </h3>
+
+                        <p>
+                            Improve website performance, loading speed
+                            and overall user experience.
+                        </p>
+
+                    </div>
+
+
+                    <div class="service-card">
+
+                        <div class="service-icon">
+                            ⚙
+                        </div>
+
+                        <h3>
+                            Website Management
+                        </h3>
+
+                        <p>
+                            Ongoing updates, maintenance, content changes
+                            and technical support.
+                        </p>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             PRICING
+        ========================== -->
+
+        <section id="pricing">
+
+            <div class="section-container">
+
+
+                <div class="section-heading">
+
+                    <div class="section-label">
+                        Pricing
+                    </div>
+
+                    <h2>
+                        Simple starting prices.
+                    </h2>
+
+                    <p>
+                        Every project is different. Final pricing depends
+                        on the features, pages and requirements of your project.
+                    </p>
+
+                </div>
+
+
+                <div class="pricing-grid">
+
+
+                    <!-- STARTER -->
+
+                    <div class="price-card">
+
+                        <h3>
+                            Starter
+                        </h3>
+
+                        <div class="price">
+                            ₹5,999+
+                        </div>
+
+                        <div class="price-note">
+                            Starting price
+                        </div>
+
+
+                        <ul class="features">
+
+                            <li>
+                                1–3 pages
+                            </li>
+
+                            <li>
+                                Responsive design
+                            </li>
+
+                            <li>
+                                Modern UI
+                            </li>
+
+                            <li>
+                                Contact section
+                            </li>
+
+                            <li>
+                                Basic SEO setup
+                            </li>
+
+                            <li>
+                                Website deployment
+                            </li>
+
+                        </ul>
+
+
+                        <a
+                            href="https://wa.me/919821796908"
+                            class="btn btn-secondary"
+                            target="_blank">
+
+                            Get Started
+
+                        </a>
+
+                    </div>
+
+
+                    <!-- BUSINESS -->
+
+                    <div class="price-card featured">
+
+                        <div class="popular">
+                            POPULAR
+                        </div>
+
+                        <h3>
+                            Business
+                        </h3>
+
+                        <div class="price">
+                            ₹11,999+
+                        </div>
+
+                        <div class="price-note">
+                            Starting price
+                        </div>
+
+
+                        <ul class="features">
+
+                            <li>
+                                Up to 7 pages
+                            </li>
+
+                            <li>
+                                Custom UI/UX
+                            </li>
+
+                            <li>
+                                Responsive design
+                            </li>
+
+                            <li>
+                                Contact forms
+                            </li>
+
+                            <li>
+                                Basic SEO
+                            </li>
+
+                            <li>
+                                Speed optimization
+                            </li>
+
+                            <li>
+                                Deployment
+                            </li>
+
+                        </ul>
+
+
+                        <a
+                            href="https://wa.me/919821796908"
+                            class="btn btn-primary"
+                            target="_blank">
+
+                            Get Started
+
+                        </a>
+
+                    </div>
+
+
+                    <!-- PROFESSIONAL -->
+
+                    <div class="price-card">
+
+                        <h3>
+                            Professional
+                        </h3>
+
+                        <div class="price">
+                            ₹19,999+
+                        </div>
+
+                        <div class="price-note">
+                            Starting price
+                        </div>
+
+
+                        <ul class="features">
+
+                            <li>
+                                Advanced website
+                            </li>
+
+                            <li>
+                                Custom UI/UX
+                            </li>
+
+                            <li>
+                                Admin functionality
+                            </li>
+
+                            <li>
+                                Payment integration
+                            </li>
+
+                            <li>
+                                Advanced forms
+                            </li>
+
+                            <li>
+                                SEO optimization
+                            </li>
+
+                            <li>
+                                Performance optimization
+                            </li>
+
+                            <li>
+                                Deployment & support
+                            </li>
+
+                        </ul>
+
+
+                        <a
+                            href="https://wa.me/919821796908"
+                            class="btn btn-secondary"
+                            target="_blank">
+
+                            Get Started
+
+                        </a>
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- ADDONS -->
+
+                <div class="addons">
+
+                    <div class="section-heading">
+
+                        <div class="section-label">
+                            Add-ons
+                        </div>
+
+                        <h2>
+                            Need something extra?
+                        </h2>
+
+                    </div>
+
+
+                    <div class="addon-grid">
+
+
+                        <div class="addon">
+
+                            <span>
+                                Landing Page
+                            </span>
+
+                            <span>
+                                ₹2,000+
+                            </span>
+
+                        </div>
+
+
+                        <div class="addon">
+
+                            <span>
+                                Website Redesign
+                            </span>
+
+                            <span>
+                                ₹5,000+
+                            </span>
+
+                        </div>
+
+
+                        <div class="addon">
+
+                            <span>
+                                Basic SEO Setup
+                            </span>
+
+                            <span>
+                                ₹2,000+
+                            </span>
+
+                        </div>
+
+
+                        <div class="addon">
+
+                            <span>
+                                Monthly SEO
+                            </span>
+
+                            <span>
+                                ₹4,000+/month
+                            </span>
+
+                        </div>
+
+
+                        <div class="addon">
+
+                            <span>
+                                Website Maintenance
+                            </span>
+
+                            <span>
+                                ₹1,499+/month
+                            </span>
+
+                        </div>
+
+
+                        <div class="addon">
+
+                            <span>
+                                Speed Optimization
+                            </span>
+
+                            <span>
+                                ₹2,000+
+                            </span>
+
+                        </div>
+
+
+                        <div class="addon">
+
+                            <span>
+                                Payment Gateway
+                            </span>
+
+                            <span>
+                                ₹2,000+
+                            </span>
+
+                        </div>
+
+
+                        <div class="addon">
+
+                            <span>
+                                Admin Dashboard
+                            </span>
+
+                            <span>
+                                ₹5,000+
+                            </span>
+
+                        </div>
+
+
+                        <div class="addon">
+
+                            <span>
+                                Hosting Setup
+                            </span>
+
+                            <span>
+                                ₹1,000+
+                            </span>
+
+                        </div>
+
+
+                        <div class="addon">
+
+                            <span>
+                                Website Deployment
+                            </span>
+
+                            <span>
+                                ₹1,000+
+                            </span>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             PROCESS
+        ========================== -->
+
+        <section id="process">
+
+            <div class="section-container">
+
+
+                <div class="section-heading">
+
+                    <div class="section-label">
+                        Our Process
+                    </div>
+
+                    <h2>
+                        From idea to online.
+                    </h2>
+
+                    <p>
+                        A simple and transparent process designed to
+                        keep your project clear from beginning to launch.
+                    </p>
+
+                </div>
+
+
+                <div class="process-grid">
+
+
+                    <div class="process-card">
+
+                        <div class="process-number">
+                            01 / DISCUSS
+                        </div>
+
+                        <h3>
+                            Discuss
+                        </h3>
+
+                        <p>
+                            We understand your business, goals,
+                            audience and website requirements.
+                        </p>
+
+                    </div>
+
+
+                    <div class="process-card">
+
+                        <div class="process-number">
+                            02 / DESIGN
+                        </div>
+
+                        <h3>
+                            Design
+                        </h3>
+
+                        <p>
+                            We plan the structure, visual style and
+                            user experience of your website.
+                        </p>
+
+                    </div>
+
+
+                    <div class="process-card">
+
+                        <div class="process-number">
+                            03 / DEVELOP
+                        </div>
+
+                        <h3>
+                            Develop
+                        </h3>
+
+                        <p>
+                            Your website is developed, tested and
+                            optimized for different devices.
+                        </p>
+
+                    </div>
+
+
+                    <div class="process-card">
+
+                        <div class="process-number">
+                            04 / LAUNCH
+                        </div>
+
+                        <h3>
+                            Launch
+                        </h3>
+
+                        <p>
+                            We deploy your website and help you
+                            get your digital presence online.
+                        </p>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             CONTACT
+        ========================== -->
+
+        <section id="contact" class="cta">
+
+            <div class="cta-box">
+
+                <div class="section-label">
+                    Start a Project
+                </div>
+
+                <h2>
+                    Let's build something<br>
+                    great together.
+                </h2>
+
+                <p>
+                    Have an idea, business or project in mind?
+                    Let's discuss how Craftlane can bring it online.
+                </p>
+
+
+                <div class="contact-buttons">
+
+
+                    <a
+                        href="https://wa.me/919821796908"
+                        class="btn btn-primary"
+                        target="_blank">
+
+                        WhatsApp Us
+
+                    </a>
+
+
+                    <a
+                        href="mailto:salonipanwar0311@gmail.com"
+                        class="btn btn-secondary">
+
+                        Email Us
+
+                    </a>
+
+
+                    <a
+                        href="tel:9821796908"
+                        class="btn btn-secondary">
+
+                        Call Us
+
+                    </a>
+
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <footer>
+
+        <div class="footer-container">
+
+
+            <div class="footer-brand">
+
+                <div class="logo">
+                    Craft<span>lane</span>
+                </div>
+
+                <p>
+                    Web Development • Design • Digital Solutions
+                </p>
+
+            </div>
+
+
+            <div class="footer-contact">
+
+                <a href="tel:9821796908">
+                    9821796908
+                </a>
+
+                <a href="mailto:salonipanwar0311@gmail.com">
+                    salonipanwar0311@gmail.com
+                </a>
+
+                <a
+                    href="https://wa.me/919821796908"
+                    target="_blank">
+
+                    WhatsApp
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+    <!-- =========================
+         FLOATING WHATSAPP
+    ========================== -->
+
+    <a
+        href="https://wa.me/919821796908"
+        class="whatsapp"
+        target="_blank"
+        aria-label="Chat on WhatsApp">
+
+        ☎
+
+    </a>
+
+
+    <!-- =========================
+         LIGHT / DARK MODE SCRIPT
+    ========================== -->
+
+    <script>
+
+        const themeToggle =
+            document.getElementById("themeToggle");
+
+        const body =
+            document.body;
+
+
+        /* Load saved theme */
+
+        const savedTheme =
+            localStorage.getItem("craftlane-theme");
+
+
+        if (savedTheme === "light") {
+
+            body.classList.add("light");
+
+            themeToggle.textContent = "☾";
+
+        } else {
+
+            themeToggle.textContent = "☀";
+
+        }
+
+
+        /* Toggle theme */
+
+        themeToggle.addEventListener("click", function () {
+
+            body.classList.toggle("light");
+
+
+            if (body.classList.contains("light")) {
+
+                themeToggle.textContent = "☾";
+
+                localStorage.setItem(
+                    "craftlane-theme",
+                    "light"
+                );
+
+            } else {
+
+                themeToggle.textContent = "☀";
+
+                localStorage.setItem(
+                    "craftlane-theme",
+                    "dark"
+                );
+
+            }
+
+        });
+
+    </script>
+
+</body>
+</html>
+
